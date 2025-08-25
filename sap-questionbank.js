@@ -975,6 +975,8 @@ window.questionBank = [
         1: "EMR is for big data analytics, not optimized for genomic HPC workloads. EFS lacks the performance for massive parallel genomic processing.",
         2: "EBS Multi-Attach is limited to 16 instances, insufficient for 10,000 jobs. ParallelCluster adds management overhead.",
         3: "Outposts unnecessary for this use case. FSx for Windows not optimized for genomic workloads. Glacier Deep Archive has 12-hour retrieval time."
+	  },
+		examStrategy: "For genomic/biotech workloads: S3 Object Lock for HIPAA compliance, Batch for job orchestration at scale, FSx for Lustre for HPC performance."
       }
 	 },
 	 
