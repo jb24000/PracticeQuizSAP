@@ -644,344 +644,343 @@
     <script src="sap-questionbank.js"></script>
 
     <script>
-        /* ===== Mode config (SAP-specific with DVA timer logic) ===== */
-        const MODES = {
-            triage: { 
-                label: 'Triage', 
-                total: 10, 
-                timePerQ: 30,  // 30 seconds per question
-                perQWarn: 30,  // warn at 30 seconds
-                globalMin: null, 
-                autoAdvance: true, 
-                filter: q => (q.difficulty || '').toLowerCase() !== 'easy' 
-            },
-            speed: { 
-                label: 'Speed', 
-                total: 40, 
-                timePerQ: 90,  // 90 seconds per question
-                perQWarn: 90,  // warn at 90 seconds
-                globalMin: null, 
-                autoAdvance: true, 
-                filter: null 
-            },
-            exam: { 
-                label: 'Full Exam', 
-                total: 75,  // SAP exam has 75 questions
-                timePerQ: null, 
-                perQWarn: 144,  // warn at 144 seconds (180 min / 75 questions)
-                globalMin: 180,  // 180 minutes for SAP exam
-                autoAdvance: false, 
-                filter: null 
-            },
-            strategic: { 
-                label: 'Strategic', 
-                total: 30, 
-                timePerQ: null, 
-                perQWarn: null, 
-                globalMin: null, 
-                autoAdvance: false, 
-                filter: null 
+    /* ===== Mode config (SAP-specific with DVA timer logic) ===== */
+const MODES = {
+    triage: { 
+        label: 'Triage', 
+        total: 10, 
+        timePerQ: 30,  // 30 seconds per question
+        perQWarn: 30,  // warn at 30 seconds
+        globalMin: null, 
+        autoAdvance: true, 
+        filter: q => (q.difficulty || '').toLowerCase() !== 'easy' 
+    },
+    speed: { 
+        label: 'Speed', 
+        total: 40, 
+        timePerQ: 90,  // 90 seconds per question
+        perQWarn: 90,  // warn at 90 seconds
+        globalMin: null, 
+        autoAdvance: true, 
+        filter: null 
+    },
+    exam: { 
+        label: 'Full Exam', 
+        total: 75,  // SAP exam has 75 questions
+        timePerQ: null, 
+        perQWarn: 144,  // warn at 144 seconds (180 min / 75 questions)
+        globalMin: 180,  // 180 minutes for SAP exam
+        autoAdvance: false, 
+        filter: null 
+    },
+    strategic: { 
+        label: 'Strategic', 
+        total: 30, 
+        timePerQ: null, 
+        perQWarn: null, 
+        globalMin: null, 
+        autoAdvance: false, 
+        filter: null 
+    }
+};
+
+/* ===== State & helpers ===== */
+const state = {
+    mode: null,
+    questions: [],
+    index: 0,
+    answers: [],
+    correctCount: 0,
+    flagged: new Set(),
+    skipped: new Set(),
+    startedAt: null,
+    qStartedAt: null,
+    perQTimes: [],
+    timers: { global: null, perQ: null }
+};
+
+const $ = id => document.getElementById(id);
+const pad2 = n => String(n).padStart(2, '0');
+const fmt = s => `${pad2((s / 60) | 0)}:${pad2(s % 60)}`;
+const dClock = s => { s = Math.abs(s); return `${(s / 60) | 0}m ${pad2(s % 60)}s` };
+
+function sample(arr, n) {
+    if (n >= arr.length) return [...arr].sort(() => Math.random() - 0.5);
+    const out = [], u = new Set();
+    while (out.length < n) {
+        const i = (Math.random() * arr.length) | 0;
+        if (!u.has(i)) { u.add(i); out.push(arr[i]) }
+    }
+    return out;
+}
+
+function overallDelta(cfg, perQElapsed) {
+    const base = cfg.timePerQ || (cfg.globalMin ? Math.round((cfg.globalMin * 60) / state.questions.length) : (cfg.perQWarn || 90));
+    const answered = state.answers.filter(a => a !== null).length;
+    const expected = answered * base + Math.min(perQElapsed, base);
+    const actual = ((Date.now() - state.startedAt) / 1000) | 0;
+    return actual - expected; // + behind, - ahead
+}
+
+/* ===== Engine ===== */
+function startMode(name) {
+    if (!Array.isArray(window.questionBank) || !window.questionBank.length) {
+        alert('Questions not loaded.');
+        return;
+    }
+    const cfg = MODES[name];
+    state.mode = name;
+    const pool = cfg.filter ? window.questionBank.filter(cfg.filter) : window.questionBank;
+    state.questions = sample(pool, Math.min(cfg.total, pool.length));
+    state.index = 0;
+    state.answers = new Array(state.questions.length).fill(null);
+    state.correctCount = 0;
+    state.flagged.clear();
+    state.skipped.clear();
+    state.perQTimes = new Array(state.questions.length).fill(0);
+    state.startedAt = Date.now();
+
+    $('modeSelection').style.display = 'none';
+    $('timerSection').style.display = 'grid';
+    $('questionContainer').style.display = 'block';
+    $('resultsContainer').style.display = 'none';
+    $('explanation').style.display = 'none';
+
+    clearInterval(state.timers.global);
+    clearInterval(state.timers.perQ);
+
+    if (cfg.globalMin) {
+        const end = state.startedAt + cfg.globalMin * 60 * 1000;
+        state.timers.global = setInterval(() => {
+            const left = Math.max(0, ((end - Date.now()) / 1000) | 0);
+            $('globalTimer').textContent = fmt(left);
+            if (left <= 0) {
+                clearInterval(state.timers.global);
+                finish();
             }
-        };
+        }, 250);
+    } else {
+        state.timers.global = setInterval(() => {
+            const el = ((Date.now() - state.startedAt) / 1000) | 0;
+            $('globalTimer').textContent = fmt(el);
+        }, 250);
+    }
+    render(true);
+}
 
-        /* ===== State & helpers ===== */
-        const state = {
-            mode: null,
-            questions: [],
-            index: 0,
-            answers: [],
-            correctCount: 0,
-            flagged: new Set(),
-            skipped: new Set(),
-            startedAt: null,
-            qStartedAt: null,
-            perQTimes: [],
-            timers: { global: null, perQ: null }
-        };
+function startPerQ() {
+    const cfg = MODES[state.mode];
+    clearInterval(state.timers.perQ);
+    state.qStartedAt = Date.now();
+    
+    state.timers.perQ = setInterval(() => {
+        const elapsed = ((Date.now() - state.qStartedAt) / 1000) | 0;
+        $('questionTimer').textContent = fmt(elapsed);
 
-        const $ = id => document.getElementById(id);
-        const pad2 = n => String(n).padStart(2, '0');
-        const fmt = s => `${pad2((s / 60) | 0)}:${pad2(s % 60)}`;
-        const dClock = s => { s = Math.abs(s); return `${(s / 60) | 0}m ${pad2(s % 60)}s` };
-
-        function sample(arr, n) {
-            if (n >= arr.length) return [...arr].sort(() => Math.random() - 0.5);
-            const out = [], u = new Set();
-            while (out.length < n) {
-                const i = (Math.random() * arr.length) | 0;
-                if (!u.has(i)) { u.add(i); out.push(arr[i]) }
-            }
-            return out;
-        }
-
-        function overallDelta(cfg, perQElapsed) {
-            const base = cfg.timePerQ || (cfg.globalMin ? Math.round((cfg.globalMin * 60) / state.questions.length) : (cfg.perQWarn || 90));
-            const answered = state.answers.filter(a => a !== null).length;
-            const expected = answered * base + Math.min(perQElapsed, base);
-            const actual = ((Date.now() - state.startedAt) / 1000) | 0;
-            return actual - expected; // + behind, - ahead
-        }
-
-        /* ===== Engine ===== */
-        function startMode(name) {
-            if (!Array.isArray(window.questionBank) || !window.questionBank.length) {
-                alert('Questions not loaded.');
-                return;
-            }
-            const cfg = MODES[name];
-            state.mode = name;
-            const pool = cfg.filter ? window.questionBank.filter(cfg.filter) : window.questionBank;
-            state.questions = sample(pool, Math.min(cfg.total, pool.length));
-            state.index = 0;
-            state.answers = new Array(state.questions.length).fill(null);
-            state.correctCount = 0;
-            state.flagged.clear();
-            state.skipped.clear();
-            state.perQTimes = new Array(state.questions.length).fill(0);
-            state.startedAt = Date.now();
-
-            $('modeSelection').style.display = 'none';
-            $('timerSection').style.display = 'grid';
-            $('questionContainer').style.display = 'block';
-            $('resultsContainer').style.display = 'none';
-            $('explanation').style.display = 'none';
-
-            clearInterval(state.timers.global);
-            clearInterval(state.timers.perQ);
-
-            if (cfg.globalMin) {
-                const end = state.startedAt + cfg.globalMin * 60 * 1000;
-                state.timers.global = setInterval(() => {
-                    const left = Math.max(0, ((end - Date.now()) / 1000) | 0);
-                    $('globalTimer').textContent = fmt(left);
-                    if (left <= 0) {
-                        clearInterval(state.timers.global);
-                        finish();
-                    }
-                }, 250);
-            } else {
-                state.timers.global = setInterval(() => {
-                    const el = ((Date.now() - state.startedAt) / 1000) | 0;
-                    $('globalTimer').textContent = fmt(el);
-                }, 250);
-            }
-            render(true);
-        }
-
-        function startPerQ() {
-            const cfg = MODES[state.mode];
-            clearInterval(state.timers.perQ);
-            state.qStartedAt = Date.now();
-            
-            state.timers.perQ = setInterval(() => {
-                const elapsed = ((Date.now() - state.qStartedAt) / 1000) | 0;
-                $('questionTimer').textContent = fmt(elapsed);
-
-                // Time limit per question with auto-advance
-                if (cfg.timePerQ) {
-                    const left = cfg.timePerQ - elapsed;
-                    if (left <= 0) {
-                        recordQTime();
-                        state.skipped.add(state.index);
-                        clearInterval(state.timers.perQ);
-                        
-                        // Show alert for going over time
-                        alert(`Time's up! Moving to next question.`);
-                        
-                        if (cfg.autoAdvance) {
-                            next();
-                        } else {
-                            $('submitBtn').style.display = 'none';
-                            $('nextBtn').style.display = 'block';
-                        }
-                        return;
-                    }
-                }
-
-                // Pace indicator updates
-                const delta = overallDelta(cfg, elapsed);
-                const ind = $('paceIndicator');
-                const val = $('paceValue');
+        // Time limit per question - automatically advance when time runs out
+        if (cfg.timePerQ) {
+            const left = cfg.timePerQ - elapsed;
+            if (left <= 0) {
+                recordQTime();
+                state.skipped.add(state.index);
+                clearInterval(state.timers.perQ);
                 
-                if (cfg.perQWarn && elapsed > cfg.perQWarn) {
-                    ind.className = 'pace-indicator bad';
-                    ind.textContent = `OVER ${cfg.perQWarn}s`;
-                    val.textContent = `+${elapsed - cfg.perQWarn}s | Δ ${delta >= 0 ? '+' : '-'}${dClock(delta)}`;
-                } else {
-                    if (delta > 15) {
-                        ind.className = 'pace-indicator warn';
-                        ind.textContent = 'BEHIND';
-                    } else if (delta < -15) {
-                        ind.className = 'pace-indicator ok';
-                        ind.textContent = 'AHEAD';
-                    } else {
-                        ind.className = 'pace-indicator ok';
-                        ind.textContent = 'ON TRACK';
-                    }
-                    val.textContent = `Δ ${delta >= 0 ? '+' : '-'}${dClock(delta)}`;
-                }
-            }, 1000);
-        }
-
-        function recordQTime() {
-            const s = ((Date.now() - state.qStartedAt) / 1000) | 0;
-            state.perQTimes[state.index] += s;
-        }
-
-        function render(first = false) {
-            const q = state.questions[state.index];
-            if (!q) {
-                finish();
+                // Show alert for going over time
+                alert(`Time's up! Moving to next question.`);
+                
+                // Always advance to next question when time runs out
+                next();
                 return;
             }
-            
-            // Extract domain number
-            const domainMatch = q.domain?.match(/Domain (\d)/);
-            const domainText = domainMatch ? `Domain ${domainMatch[1]}` : 'Domain';
-            $('domainBadge').textContent = domainText;
-            
-            const diff = (q.difficulty || 'medium').toLowerCase();
-            const db = $('difficultyBadge');
-            db.textContent = diff[0].toUpperCase() + diff.slice(1);
-            db.className = 'badge difficulty-badge ' + diff;
-            
-            $('questionNumber').textContent = `Q${state.index + 1} of ${state.questions.length}`;
-            $('scenario').textContent = q.scenario || '';
-            $('questionText').textContent = q.question || '';
-
-            const wrap = $('options');
-            wrap.innerHTML = '';
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            
-            (q.options || []).forEach((opt, i) => {
-                const d = document.createElement('div');
-                d.className = 'option';
-                d.onclick = () => select(i);
-                d.innerHTML = `<div class="option-letter">${letters[i]}</div><div>${opt}</div>`;
-                if (state.answers[state.index] === i) d.classList.add('selected');
-                wrap.appendChild(d);
-            });
-
-            $('explanation').style.display = 'none';
-            $('submitBtn').style.display = 'block';
-            $('nextBtn').style.display = 'none';
-            
-            startPerQ();
-            
-            if (first) {
-                $('paceIndicator').className = 'pace-indicator ok';
-                $('paceIndicator').textContent = 'ON TRACK';
-                $('paceValue').textContent = 'Δ +0m 00s';
-            }
         }
 
-        function select(i) {
-            state.answers[state.index] = i;
-            [...$('options').children].forEach((el, idx) => el.classList.toggle('selected', idx === i));
-        }
-
-        function submitAnswer() {
-            const q = state.questions[state.index];
-            if (state.answers[state.index] == null) {
-                alert('Select an answer or Skip.');
-                return;
-            }
-            
-            recordQTime();
-            clearInterval(state.timers.perQ);
-            
-            const chosen = state.answers[state.index];
-            [...$('options').children].forEach((el, idx) => {
-                el.classList.remove('selected');
-                el.classList.add('disabled');
-                el.classList.add(idx === q.correct ? 'correct' : (idx === chosen ? 'incorrect' : ''));
-            });
-            
-            if (chosen === q.correct) state.correctCount++;
-            
-            $('correctExplanation').textContent = (q.explanation && q.explanation.correct) || '';
-            $('strategyTip').textContent = (q.explanation && q.explanation.examStrategy) || '';
-            $('explanation').style.display = 'block';
-            $('submitBtn').style.display = 'none';
-            $('nextBtn').style.display = 'block';
-        }
-
-        function next() {
-            clearInterval(state.timers.perQ);
-            if (state.index < state.questions.length - 1) {
-                state.index++;
-                render();
+        // Pace indicator updates
+        const delta = overallDelta(cfg, elapsed);
+        const ind = $('paceIndicator');
+        const val = $('paceValue');
+        
+        if (cfg.perQWarn && elapsed > cfg.perQWarn) {
+            ind.className = 'pace-indicator bad';
+            ind.textContent = `OVER ${cfg.perQWarn}s`;
+            val.textContent = `+${elapsed - cfg.perQWarn}s | Δ ${delta >= 0 ? '+' : '-'}${dClock(delta)}`;
+        } else {
+            if (delta > 15) {
+                ind.className = 'pace-indicator warn';
+                ind.textContent = 'BEHIND';
+            } else if (delta < -15) {
+                ind.className = 'pace-indicator ok';
+                ind.textContent = 'AHEAD';
             } else {
-                finish();
+                ind.className = 'pace-indicator ok';
+                ind.textContent = 'ON TRACK';
             }
+            val.textContent = `Δ ${delta >= 0 ? '+' : '-'}${dClock(delta)}`;
         }
+    }, 1000);
+}
 
-        function previousQuestion() {
-            clearInterval(state.timers.perQ);
-            if (state.index > 0) {
-                state.index--;
-                render();
-            }
-        }
+function recordQTime() {
+    const s = ((Date.now() - state.qStartedAt) / 1000) | 0;
+    state.perQTimes[state.index] += s;
+}
 
-        function skipQuestion() {
-            recordQTime();
-            state.skipped.add(state.index);
-            next();
-        }
+function render(first = false) {
+    const q = state.questions[state.index];
+    if (!q) {
+        finish();
+        return;
+    }
+    
+    // Extract domain number
+    const domainMatch = q.domain?.match(/Domain (\d)/);
+    const domainText = domainMatch ? `Domain ${domainMatch[1]}` : 'Domain';
+    $('domainBadge').textContent = domainText;
+    
+    const diff = (q.difficulty || 'medium').toLowerCase();
+    const db = $('difficultyBadge');
+    db.textContent = diff[0].toUpperCase() + diff.slice(1);
+    db.className = 'badge difficulty-badge ' + diff;
+    
+    $('questionNumber').textContent = `Q${state.index + 1} of ${state.questions.length}`;
+    $('scenario').textContent = q.scenario || '';
+    $('questionText').textContent = q.question || '';
 
-        function toggleFlag() {
-            state.flagged.has(state.index) ? state.flagged.delete(state.index) : state.flagged.add(state.index);
-        }
+    const wrap = $('options');
+    wrap.innerHTML = '';
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+    (q.options || []).forEach((opt, i) => {
+        const d = document.createElement('div');
+        d.className = 'option';
+        d.onclick = () => select(i);
+        d.innerHTML = `<div class="option-letter">${letters[i]}</div><div>${opt}</div>`;
+        if (state.answers[state.index] === i) d.classList.add('selected');
+        wrap.appendChild(d);
+    });
 
-        function finish() {
-            clearInterval(state.timers.global);
-            clearInterval(state.timers.perQ);
-            $('questionContainer').style.display = 'none';
-            $('resultsContainer').style.display = 'block';
-            
-            const total = state.questions.length;
-            const pct = Math.round((state.correctCount / total) * 100);
-            $('scoreText').textContent = `${pct}%`;
-            $('correctCount').textContent = `${state.correctCount}/${total}`;
-            $('timeUsed').textContent = fmt(((Date.now() - state.startedAt) / 1000) | 0);
-            $('flaggedCount').textContent = state.flagged.size;
-        }
+    $('explanation').style.display = 'none';
+    $('submitBtn').style.display = 'block';
+    $('nextBtn').style.display = 'none';
+    
+    startPerQ();
+    
+    if (first) {
+        $('paceIndicator').className = 'pace-indicator ok';
+        $('paceIndicator').textContent = 'ON TRACK';
+        $('paceValue').textContent = 'Δ +0m 00s';
+    }
+}
 
-        function resetQuiz() {
-            clearInterval(state.timers.global);
-            clearInterval(state.timers.perQ);
-            state.mode = null;
-            state.questions = [];
-            state.index = 0;
-            state.answers = [];
-            state.flagged.clear();
-            state.skipped.clear();
-            $('resultsContainer').style.display = 'none';
-            $('questionContainer').style.display = 'none';
-            $('timerSection').style.display = 'none';
-            $('modeSelection').style.display = 'grid';
-            $('globalTimer').textContent = '00:00';
-            $('questionTimer').textContent = '00:00';
-            $('paceIndicator').className = 'pace-indicator ok';
-            $('paceIndicator').textContent = 'ON TRACK';
-            $('paceValue').textContent = 'Δ +0m 00s';
-            window.scrollTo(0, 0);
-        }
+function select(i) {
+    state.answers[state.index] = i;
+    [...$('options').children].forEach((el, idx) => el.classList.toggle('selected', idx === i));
+}
 
-        function reviewAnswers() {
-            alert('Detailed review coming next build.');
-        }
+function submitAnswer() {
+    const q = state.questions[state.index];
+    if (state.answers[state.index] == null) {
+        alert('Select an answer or Skip.');
+        return;
+    }
+    
+    recordQTime();
+    clearInterval(state.timers.perQ);
+    
+    const chosen = state.answers[state.index];
+    [...$('options').children].forEach((el, idx) => {
+        el.classList.remove('selected');
+        el.classList.add('disabled');
+        el.classList.add(idx === q.correct ? 'correct' : (idx === chosen ? 'incorrect' : ''));
+    });
+    
+    if (chosen === q.correct) state.correctCount++;
+    
+    $('correctExplanation').textContent = (q.explanation && q.explanation.correct) || '';
+    $('strategyTip').textContent = (q.explanation && q.explanation.examStrategy) || '';
+    $('explanation').style.display = 'block';
+    
+    // Automatically advance to next question after 2 seconds
+    setTimeout(() => {
+        next();
+    }, 2000);
+}
 
-        // Public API
-        window.startMode = startMode;
-        window.previousQuestion = previousQuestion;
-        window.submitAnswer = submitAnswer;
-        window.nextQuestion = next;
-        window.skipQuestion = skipQuestion;
-        window.toggleFlag = toggleFlag;
-        window.resetQuiz = resetQuiz;
-        window.reviewAnswers = reviewAnswers;
+function next() {
+    clearInterval(state.timers.perQ);
+    if (state.index < state.questions.length - 1) {
+        state.index++;
+        render();
+    } else {
+        finish();
+    }
+}
+
+function previousQuestion() {
+    clearInterval(state.timers.perQ);
+    if (state.index > 0) {
+        state.index--;
+        render();
+    }
+}
+
+function skipQuestion() {
+    recordQTime();
+    state.skipped.add(state.index);
+    next();
+}
+
+function toggleFlag() {
+    state.flagged.has(state.index) ? state.flagged.delete(state.index) : state.flagged.add(state.index);
+}
+
+function finish() {
+    clearInterval(state.timers.global);
+    clearInterval(state.timers.perQ);
+    $('questionContainer').style.display = 'none';
+    $('resultsContainer').style.display = 'block';
+    
+    const total = state.questions.length;
+    const pct = Math.round((state.correctCount / total) * 100);
+    $('scoreText').textContent = `${pct}%`;
+    $('correctCount').textContent = `${state.correctCount}/${total}`;
+    $('timeUsed').textContent = fmt(((Date.now() - state.startedAt) / 1000) | 0);
+    $('flaggedCount').textContent = state.flagged.size;
+}
+
+function resetQuiz() {
+    clearInterval(state.timers.global);
+    clearInterval(state.timers.perQ);
+    state.mode = null;
+    state.questions = [];
+    state.index = 0;
+    state.answers = [];
+    state.flagged.clear();
+    state.skipped.clear();
+    $('resultsContainer').style.display = 'none';
+    $('questionContainer').style.display = 'none';
+    $('timerSection').style.display = 'none';
+    $('modeSelection').style.display = 'grid';
+    $('globalTimer').textContent = '00:00';
+    $('questionTimer').textContent = '00:00';
+    $('paceIndicator').className = 'pace-indicator ok';
+    $('paceIndicator').textContent = 'ON TRACK';
+    $('paceValue').textContent = 'Δ +0m 00s';
+    window.scrollTo(0, 0);
+}
+
+function reviewAnswers() {
+    alert('Detailed review coming next build.');
+}
+
+// Public API
+window.startMode = startMode;
+window.previousQuestion = previousQuestion;
+window.submitAnswer = submitAnswer;
+window.nextQuestion = next;
+window.skipQuestion = skipQuestion;
+window.toggleFlag = toggleFlag;
+window.resetQuiz = resetQuiz;
+window.reviewAnswers = reviewAnswers;
     </script>
 </body>
 </html>
