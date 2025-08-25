@@ -912,7 +912,8 @@ window.questionBank = [
         3: "ALB doesn't support WebSocket at the scale needed. ECS adds operational overhead compared to managed services."
       },
 		examStrategy: "For real-time gaming at scale: GameLift FlexMatch for matchmaking, DynamoDB global tables for session state, ElastiCache for leaderboards. API Gateway WebSocket handles massive concurrent connections."
-  },
+	}
+	},
 
   {
     id: 'sap_039',
@@ -936,7 +937,9 @@ window.questionBank = [
         3: "Predictive scaling helps but doesn't eliminate idle capacity like serverless. DAX is unnecessary cost if not using DynamoDB."
       },
 		examStrategy: "For e-commerce optimization: Fargate eliminates idle capacity, Aurora Serverless v2 auto-scales, S3 Intelligent-Tiering optimizes storage. Lambda@Edge reduces backend load."
-  },
+	}
+	
+	},
 
   {
     id: 'sap_040',
@@ -960,7 +963,9 @@ window.questionBank = [
         3: "Snowball Edge adds unnecessary time. Blue/Green deployment doesn't address the stored procedure compatibility issue."
       },
 		examStrategy: "For Oracle migrations with minimal downtime: RDS Custom maintains Oracle compatibility, Babelfish enables PostgreSQL to run Oracle workloads. DMS with CDC for continuous replication."
-  },
+	}
+	
+	},
 
   {
     id: 'sap_041',
