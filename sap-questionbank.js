@@ -861,9 +861,11 @@ window.questionBank = [
             whyWrong: {
                 1: "Managed Blockchain has lower throughput and higher latency than required",
                 2: "DynamoDB Streams alone doesn't provide immutable audit trail guarantees. Rekognition is for image/video analysis, not transaction fraud detection.",
-     3: "S3 Object Lock provides immutability but not the performance for real-time audit trails. Comprehend is for NLP, not fraud detection. Step Functions adds too much latency for million TPS."
-   }
- }, 
+                3: "S3 Object Lock provides immutability but not the performance for real-time audit trails. Comprehend is for NLP, not fraud detection. Step Functions adds too much latency for million TPS."
+   },
+		 examStrategy: "For cryptocurrency/fintech at scale: QLDB provides immutable audit trails with cryptographic verification. Kinesis handles millions of TPS. DynamoDB offers microsecond latency for order books. SageMaker enables real-time fraud detection."	
+ }
+	},		
 {
   id: 'sap_037',
   domain: "Domain 1: Design Solutions for Organizational Complexity",
