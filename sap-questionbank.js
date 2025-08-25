@@ -2417,8 +2417,8 @@ window.questionBank = [
        },
        examStrategy: "For large-scale regulated migrations: Migration Hub Orchestra coordinates complexity, wave-based approach manages risk, blue-green deployment ensures zero downtime, FSI Lens provides compliance blueprints."
    }
-},
-	}
+}
+	
 ];  // <-- This closes the questionBank array
 
 // Randomize answer positions to fix the problem where correct answer is always position 0
