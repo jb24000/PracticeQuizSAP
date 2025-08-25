@@ -908,7 +908,8 @@ window.questionBank = [
         1: "AppSync is for GraphQL and not optimized for gaming latency. Kinesis Analytics adds unnecessary complexity for simple leaderboards.",
         2: "IoT Core is not designed for gaming connections. Timestream is for time-series data, overkill for leaderboards.",
         3: "ALB doesn't support WebSocket at the scale needed. ECS adds operational overhead compared to managed services."
-      }
+      },
+		examStrategy: "For real-time gaming at scale: GameLift FlexMatch for matchmaking, DynamoDB global tables for session state, ElastiCache for leaderboards. API Gateway WebSocket handles massive concurrent connections."
   },
 
   {
@@ -931,7 +932,8 @@ window.questionBank = [
         1: "Spot Fleet risks availability issues for production web servers. RDS Proxy adds cost without solving the core scaling problem.",
         2: "EKS with Karpenter is complex and adds management overhead. Aurora Global is expensive overkill for a single-region e-commerce site.",
         3: "Predictive scaling helps but doesn't eliminate idle capacity like serverless. DAX is unnecessary cost if not using DynamoDB."
-      }
+      },
+		examStrategy: "For e-commerce optimization: Fargate eliminates idle capacity, Aurora Serverless v2 auto-scales, S3 Intelligent-Tiering optimizes storage. Lambda@Edge reduces backend load."
   },
 
   {
@@ -954,7 +956,8 @@ window.questionBank = [
         0: "SCT and Lambda conversion of stored procedures would take longer than 3 months for 500TB of databases with complex procedures.",
         1: "DataSync is for file storage, not databases. Golden Gate adds complexity and licensing costs.",
         3: "Snowball Edge adds unnecessary time. Blue/Green deployment doesn't address the stored procedure compatibility issue."
-      }
+      },
+		examStrategy: "For Oracle migrations with minimal downtime: RDS Custom maintains Oracle compatibility, Babelfish enables PostgreSQL to run Oracle workloads. DMS with CDC for continuous replication."
   },
 
   {
