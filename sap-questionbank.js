@@ -1449,7 +1449,7 @@ window.questionBank = [
        },
        examStrategy: "For healthcare migrations, HealthLake is purpose-built for medical imaging. MGN (successor to CloudEndure) is the modern server migration service. Outposts provides true hybrid infrastructure for extended transitions."
    }
-};
+},
 
 // Continuing questions 61-70...
 {
@@ -2417,11 +2417,8 @@ window.questionBank = [
        },
        examStrategy: "For large-scale regulated migrations: Migration Hub Orchestra coordinates complexity, wave-based approach manages risk, blue-green deployment ensures zero downtime, FSI Lens provides compliance blueprints."
    }
-}
-
-];
-
-}
+},
+	}
 ];  // <-- This closes the questionBank array
 
 // Randomize answer positions to fix the problem where correct answer is always position 0
