@@ -884,6 +884,8 @@ window.questionBank = [
       1: "Cognito is for application users, not enterprise workforce. PrivateLink alone doesn't provide network segmentation between business units.",
       2: "Network Firewall is good but doesn't address the identity federation requirement. Lake Formation is for data lakes specifically, not general data sharing.",
       3: "Directory Service doesn't provide modern zero-trust capabilities. VPC peering creates a mesh that's hard to manage at scale and doesn't provide inspection."
+    },
+	  examStrategy: "For zero-trust architecture: AWS SSO (Identity Center) for identity, Transit Gateway for network segmentation, RAM for secure sharing, Security Hub for compliance aggregation."
     }
   },
    {
