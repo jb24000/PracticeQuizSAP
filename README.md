@@ -17,7 +17,7 @@ A Progressive Web App for mastering the AWS Solutions Architect Professional (SA
 ## Installation
 
 ### As a Web App
-Visit: https://[your-username].github.io/PracticeQuizSAP/
+Visit: https://jb24000.github.io/PracticeQuizSAP/
 
 ### As a PWA (Mobile/Desktop)
 1. Visit the site on Chrome/Edge
