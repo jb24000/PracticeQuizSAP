@@ -2411,6 +2411,9 @@ window.questionBank = [
 
 ];
 
+}
+];  // <-- This closes the questionBank array
+
 // Randomize answer positions to fix the problem where correct answer is always position 0
 function randomizeQuestionBankAnswers(questions) {
     return questions.map(question => {
@@ -2459,3 +2462,5 @@ function randomizeQuestionBankAnswers(questions) {
 
 // Apply the randomization to fix all questions
 window.questionBank = randomizeQuestionBankAnswers(window.questionBank);
+
+console.log('SAP Question Bank loaded successfully with', window.questionBank.length, 'questions');
