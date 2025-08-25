@@ -41,7 +41,7 @@ Visit: https://[your-username].github.io/PracticeQuizSAP/
 
 ```bash
 # Clone the repository
-git clone https://github.com/[your-username]/PracticeQuizSAP.git
+git clone https://github.com/jb24000/PracticeQuizSAP.git
 
 # No build process required - pure HTML/CSS/JS
 # Open index.html in a browser to run locally
