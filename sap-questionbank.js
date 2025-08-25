@@ -1208,7 +1208,7 @@ window.questionBank = [
         },
         examStrategy: "For HPC/genomics workloads: AWS Batch + FSx for Lustre is the standard pattern. Step Functions excels at complex pipeline orchestration. Spot instances provide massive cost savings for batch workloads."
     }
-};
+},
 // Continuing questions 51-60...
 {
    id: 'sap_051',
