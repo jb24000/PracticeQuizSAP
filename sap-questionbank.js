@@ -13076,177 +13076,255 @@ window.questionBank = [
       }
     },
 
-    {
-      id: 'sap_491',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 185,
-      scenario: "A multinational smart manufacturing consortium with factories across 25 countries needs to migrate their industrial automation, predictive maintenance, and supply chain optimization systems to AWS. The solution must coordinate production across 500 factories, predict equipment failures 60 days in advance, optimize just-in-time delivery reducing inventory by 50%, and ensure cybersecurity for industrial control systems.",
-      question: "Which comprehensive modernization approach provides OPTIMAL smart manufacturing with predictive analytics and supply chain optimization?",
-      options: [
-        "Deploy Amazon EC2 for manufacturing applications, Amazon S3 for production data, AWS Lambda for automation processing, Amazon RDS for factory data, and AWS CloudTrail for security auditing",
-        "Use Amazon EKS for containerized manufacturing services, Amazon Aurora for production database, AWS Step Functions for manufacturing workflows, Amazon SageMaker for predictive models, and AWS Config for compliance monitoring",
-        "Implement AWS IoT Greengrass for edge computing in factories, AWS IoT Core for industrial device management, Amazon Timestream for time-series production data, Amazon Lookout for Equipment for predictive maintenance, Amazon Forecast for supply chain optimization, AWS PrivateLink for secure factory connectivity, AWS IoT Device Defender for cybersecurity, and AWS Control Tower for multi-country industrial governance",
-        "Deploy Amazon API Gateway for manufacturing APIs, Amazon DynamoDB for production records, AWS Glue for industrial data processing, Amazon Redshift for manufacturing analytics, and AWS Security Hub for industrial security"
-      ],
-      correctAnswer: "Implement AWS IoT Greengrass for edge computing in factories, AWS IoT Core for industrial device management, Amazon Timestream for time-series production data, Amazon Lookout for Equipment for predictive maintenance, Amazon Forecast for supply chain optimization, AWS PrivateLink for secure factory connectivity, AWS IoT Device Defender for cybersecurity, and AWS Control Tower for multi-country industrial governance",
-      explanation: "IoT Greengrass provides edge computing for real-time automation in 500 factories, IoT Core manages industrial devices across 25 countries, Timestream stores time-series production data efficiently, Lookout for Equipment predicts equipment failures 60 days in advance, Forecast optimizes just-in-time delivery reducing inventory by 50%, PrivateLink ensures secure factory-to-factory connectivity, IoT Device Defender provides cybersecurity for industrial control systems, and Control Tower provides governance for multinational smart manufacturing operations."
+  {
+  id: 'sap_491',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 185,
+  scenario: "A multinational smart manufacturing consortium with factories across 25 countries needs to migrate their industrial automation, predictive maintenance, and supply chain optimization systems to AWS. The solution must coordinate production across 500 factories, predict equipment failures 60 days in advance, optimize just-in-time delivery reducing inventory by 50%, and ensure cybersecurity for industrial control systems.",
+  question: "Which comprehensive modernization approach provides OPTIMAL smart manufacturing with predictive analytics and supply chain optimization?",
+  options: [
+    "Deploy Amazon EC2 for manufacturing applications, Amazon S3 for production data, AWS Lambda for automation processing, Amazon RDS for factory data, and AWS CloudTrail for security auditing",
+    "Use Amazon EKS for containerized manufacturing services, Amazon Aurora for production database, AWS Step Functions for manufacturing workflows, Amazon SageMaker for predictive models, and AWS Config for compliance monitoring",
+    "Implement AWS IoT Greengrass for edge computing in factories, AWS IoT Core for industrial device management, Amazon Timestream for time-series production data, Amazon Lookout for Equipment for predictive maintenance, Amazon Forecast for supply chain optimization, AWS PrivateLink for secure factory connectivity, AWS IoT Device Defender for cybersecurity, and AWS Control Tower for multi-country industrial governance",
+    "Deploy Amazon API Gateway for manufacturing APIs, Amazon DynamoDB for production records, AWS Glue for industrial data processing, Amazon Redshift for manufacturing analytics, and AWS Security Hub for industrial security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "IoT Greengrass enables edge processing at 500 factories for real-time automation with local decision-making capabilities. Lookout for Equipment predicts equipment failures 60 days in advance using ML-powered anomaly detection on industrial sensor data. Forecast optimizes just-in-time delivery reducing inventory by 50% through demand prediction algorithms. IoT Device Defender provides cybersecurity for industrial control systems with continuous threat monitoring. Control Tower ensures governance across 25 countries for manufacturing compliance and regulatory requirements.",
+    whyWrong: {
+      0: "Basic EC2 doesn't provide IoT-optimized industrial connectivity for 500 factories, lacks specialized predictive maintenance capabilities for 60-day advance predictions",
+      1: "EKS adds unnecessary complexity for manufacturing IoT workloads, doesn't address edge computing needs for distributed factory operations",
+      3: "API Gateway insufficient for industrial device connectivity at scale, lacks specialized predictive maintenance and cybersecurity features for manufacturing"
     },
+    examStrategy: "Smart manufacturing migration: IoT Greengrass edge + Lookout Equipment predictive + Forecast optimization + Device Defender security + Control Tower governance for industrial transformation."
+  }
+},
 
-    {
-      id: 'sap_492',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "medium",
-      timeRecommendation: 130,
-      scenario: "A global virtual reality platform for remote collaboration needs to migrate their 3D rendering, multi-user synchronization, and immersive content delivery systems to AWS. They serve 50 million VR users, need sub-20ms latency for VR interactions, support simultaneous collaboration sessions with up to 1,000 participants, and deliver high-resolution 3D content globally.",
-      question: "Which migration approach provides OPTIMAL VR collaboration with low-latency interactions and global content delivery?",
-      options: [
-        "Deploy Amazon GameLift for VR session management, Amazon ElastiCache for sub-20ms latency, Amazon CloudFront for global 3D content delivery, AWS Lambda for VR event processing, Amazon S3 for immersive content storage, and Amazon API Gateway for VR application integration",
-        "Use Amazon EC2 for VR applications, Amazon RDS for user data, AWS Lambda for VR processing, Amazon S3 for VR content, and Amazon CloudWatch for monitoring",
-        "Implement Amazon EKS for containerized VR services, Amazon Aurora for VR database, AWS Step Functions for VR workflows, Amazon SageMaker for VR analytics, and AWS Batch for batch processing",
-        "Deploy Amazon API Gateway for VR APIs, Amazon DynamoDB for session data, AWS Glue for VR data processing, Amazon Redshift for VR analytics, and AWS Config for configuration management"
-      ],
-      correctAnswer: "Deploy Amazon GameLift for VR session management, Amazon ElastiCache for sub-20ms latency, Amazon CloudFront for global 3D content delivery, AWS Lambda for VR event processing, Amazon S3 for immersive content storage, and Amazon API Gateway for VR application integration",
-      explanation: "GameLift manages VR collaboration sessions for up to 1,000 simultaneous participants with automatic scaling, ElastiCache provides sub-20ms latency required for smooth VR interactions, CloudFront delivers high-resolution 3D content globally to 50M VR users, Lambda processes VR events and interactions in real-time, S3 provides scalable storage for immersive VR content, and API Gateway enables seamless VR application integration and user management."
+{
+  id: 'sap_492',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "medium",
+  timeRecommendation: 130,
+  scenario: "A global virtual reality platform for remote collaboration needs to migrate their 3D rendering, multi-user synchronization, and immersive content delivery systems to AWS. They serve 50 million VR users, need sub-20ms latency for VR interactions, support simultaneous collaboration sessions with up to 1,000 participants, and deliver high-resolution 3D content globally.",
+  question: "Which migration approach provides OPTIMAL VR collaboration with low-latency interactions and global content delivery?",
+  options: [
+    "Deploy Amazon GameLift for VR session management, Amazon ElastiCache for sub-20ms latency, Amazon CloudFront for global 3D content delivery, AWS Lambda for VR event processing, Amazon S3 for immersive content storage, and Amazon API Gateway for VR application integration",
+    "Use Amazon EC2 for VR applications, Amazon RDS for user data, AWS Lambda for VR processing, Amazon S3 for VR content, and Amazon CloudWatch for monitoring",
+    "Implement Amazon EKS for containerized VR services, Amazon Aurora for VR database, AWS Step Functions for VR workflows, Amazon SageMaker for VR analytics, and AWS Batch for batch processing",
+    "Deploy Amazon API Gateway for VR APIs, Amazon DynamoDB for session data, AWS Glue for VR data processing, Amazon Redshift for VR analytics, and AWS Config for configuration management"
+  ],
+  correct: 0,
+  explanation: {
+    correct: "GameLift provides managed VR session orchestration supporting 1,000 concurrent participants with automatic scaling and low-latency networking optimized for real-time multiplayer experiences. ElastiCache delivers sub-20ms response times essential for smooth VR interactions across 50M users with in-memory caching. CloudFront ensures global delivery of high-resolution 3D content with edge optimization and geographic distribution. Lambda processes VR events in real-time with millisecond-level responsiveness for immersive collaborative experiences.",
+    whyWrong: {
+      1: "Basic EC2 lacks gaming-optimized networking for VR latency requirements, insufficient for managing 1,000 concurrent participant sessions",
+      2: "EKS introduces unnecessary complexity without VR-specific optimizations, Step Functions adds latency unsuitable for real-time VR interactions",
+      3: "Standard APIs don't provide sub-20ms latency optimization needed for VR, lacks specialized session management for large-scale collaboration"
     },
+    examStrategy: "VR collaboration migration: GameLift sessions + ElastiCache ultra-low latency + CloudFront global delivery + Lambda real-time processing for immersive VR."
+  }
+},
 
-    {
-      id: 'sap_493',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 200,
-      scenario: "A multinational climate research organization with observation stations across all continents needs to migrate their climate modeling, weather prediction, and environmental impact assessment systems to AWS. The solution must process data from 50,000 climate sensors, run complex climate simulations requiring 100,000 CPU cores, predict climate changes 100 years into the future, coordinate international climate research, and ensure data integrity for critical climate science.",
-      question: "Which comprehensive modernization strategy provides OPTIMAL climate research with long-term prediction and international coordination capabilities?",
-      options: [
-        "Deploy Amazon EC2 for climate applications, Amazon S3 for climate data, AWS Lambda for sensor processing, Amazon RDS for research data, and AWS CloudWatch for monitoring",
-        "Use Amazon EKS for containerized climate services, Amazon Aurora for climate database, AWS Step Functions for research workflows, Amazon SageMaker for climate models, and AWS Config for compliance monitoring",
-        "Implement AWS IoT Core for climate sensor connectivity, AWS ParallelCluster for massive climate simulation workloads, Amazon S3 with Cross-Region Replication for climate data preservation, Amazon Timestream for time-series environmental data, Amazon Forecast for climate prediction modeling, AWS Ground Station for satellite climate data, AWS DataSync for international research data sharing, and AWS Control Tower for global climate research governance",
-        "Deploy Amazon API Gateway for climate APIs, Amazon DynamoDB for sensor measurements, AWS Glue for climate data processing, Amazon Redshift for climate analytics, and AWS Security Hub for research security"
-      ],
-      correctAnswer: "Implement AWS IoT Core for climate sensor connectivity, AWS ParallelCluster for massive climate simulation workloads, Amazon S3 with Cross-Region Replication for climate data preservation, Amazon Timestream for time-series environmental data, Amazon Forecast for climate prediction modeling, AWS Ground Station for satellite climate data, AWS DataSync for international research data sharing, and AWS Control Tower for global climate research governance",
-      explanation: "IoT Core connects 50,000 climate sensors across all continents, ParallelCluster provides 100,000 CPU cores for complex climate simulations, S3 Cross-Region Replication ensures climate data preservation and integrity for long-term research, Timestream efficiently stores time-series environmental data, Forecast enables climate predictions 100 years into the future, Ground Station provides satellite climate data collection, DataSync facilitates secure international climate research data sharing, and Control Tower provides governance for global climate research coordination."
+{
+  id: 'sap_493',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 200,
+  scenario: "A multinational climate research organization with observation stations across all continents needs to migrate their climate modeling, weather prediction, and environmental impact assessment systems to AWS. The solution must process data from 50,000 climate sensors, run complex climate simulations requiring 100,000 CPU cores, predict climate changes 100 years into the future, coordinate international climate research, and ensure data integrity for critical climate science.",
+  question: "Which comprehensive modernization strategy provides OPTIMAL climate research with long-term prediction and international coordination capabilities?",
+  options: [
+    "Deploy Amazon EC2 for climate applications, Amazon S3 for climate data, AWS Lambda for sensor processing, Amazon RDS for research data, and AWS CloudWatch for monitoring",
+    "Use Amazon EKS for containerized climate services, Amazon Aurora for climate database, AWS Step Functions for research workflows, Amazon SageMaker for climate models, and AWS Config for compliance monitoring",
+    "Implement AWS IoT Core for climate sensor connectivity, AWS ParallelCluster for massive climate simulation workloads, Amazon S3 with Cross-Region Replication for climate data preservation, Amazon Timestream for time-series environmental data, Amazon Forecast for climate prediction modeling, AWS Ground Station for satellite climate data, AWS DataSync for international research data sharing, and AWS Control Tower for global climate research governance",
+    "Deploy Amazon API Gateway for climate APIs, Amazon DynamoDB for sensor measurements, AWS Glue for climate data processing, Amazon Redshift for climate analytics, and AWS Security Hub for research security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "ParallelCluster provides 100,000 CPU cores for complex climate simulations with HPC-optimized networking and job scheduling for massive computational workloads. S3 Cross-Region Replication ensures climate data preservation across continents with 99.999999999% durability for long-term research integrity. Forecast enables ML-powered climate predictions up to 100 years using historical patterns and environmental variables. Ground Station ingests satellite climate data for comprehensive global monitoring across all continents.",
+    whyWrong: {
+      0: "Standard EC2 lacks HPC optimization for 100K CPU climate simulations, insufficient for complex long-term modeling requirements",
+      1: "EKS doesn't provide HPC capabilities needed for massive climate simulations, lacks specialized climate data preservation features",
+      3: "Standard database solutions insufficient for 50K sensor scale, lacks HPC processing capabilities for 100-year climate predictions"
     },
+    examStrategy: "Climate research migration: ParallelCluster HPC + S3 Cross-Region preservation + Forecast long-term prediction + Ground Station satellite data for global climate science."
+  }
+},
 
-    {
-      id: 'sap_494',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "medium",
-      timeRecommendation: 145,
-      scenario: "A global autonomous vehicle testing company operating across 30 countries needs to migrate their vehicle simulation, sensor data processing, and safety validation systems to AWS. They collect terabytes of sensor data daily from 10,000 test vehicles, need real-time processing for safety-critical decisions, run millions of simulation scenarios, and ensure regulatory compliance for autonomous vehicle certification.",
-      question: "Which migration strategy provides OPTIMAL autonomous vehicle development with real-time processing and safety validation?",
-      options: [
-        "Use AWS IoT Core for vehicle sensor connectivity, Amazon Kinesis for real-time sensor data processing, AWS Batch for simulation workloads, Amazon S3 for sensor data storage, AWS Lambda for safety-critical processing, and AWS Control Tower for regulatory compliance across countries",
-        "Deploy Amazon EC2 for vehicle applications, Amazon RDS for vehicle data, AWS Lambda for sensor processing, Amazon S3 for simulation data, and Amazon CloudWatch for monitoring",
-        "Implement Amazon EKS for containerized vehicle services, Amazon Aurora for vehicle database, AWS Step Functions for testing workflows, Amazon SageMaker for vehicle analytics, and AWS Config for compliance monitoring",
-        "Use Amazon API Gateway for vehicle APIs, Amazon DynamoDB for sensor readings, AWS Glue for vehicle data processing, Amazon Redshift for vehicle analytics, and AWS Security Hub for vehicle security"
-      ],
-      correctAnswer: "Use AWS IoT Core for vehicle sensor connectivity, Amazon Kinesis for real-time sensor data processing, AWS Batch for simulation workloads, Amazon S3 for sensor data storage, AWS Lambda for safety-critical processing, and AWS Control Tower for regulatory compliance across countries",
-      explanation: "IoT Core connects sensors from 10,000 test vehicles for real-time data collection, Kinesis processes terabytes of sensor data daily in real-time for safety-critical decisions, Batch runs millions of autonomous vehicle simulation scenarios efficiently, S3 provides durable storage for massive sensor datasets, Lambda handles safety-critical processing with automatic scaling, and Control Tower ensures regulatory compliance for autonomous vehicle certification across 30 countries."
+{
+  id: 'sap_494',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "medium",
+  timeRecommendation: 145,
+  scenario: "A global autonomous vehicle testing company operating across 30 countries needs to migrate their vehicle simulation, sensor data processing, and safety validation systems to AWS. They collect terabytes of sensor data daily from 10,000 test vehicles, need real-time processing for safety-critical decisions, run millions of simulation scenarios, and ensure regulatory compliance for autonomous vehicle certification.",
+  question: "Which migration strategy provides OPTIMAL autonomous vehicle development with real-time processing and safety validation?",
+  options: [
+    "Use AWS IoT Core for vehicle sensor connectivity, Amazon Kinesis for real-time sensor data processing, AWS Batch for simulation workloads, Amazon S3 for sensor data storage, AWS Lambda for safety-critical processing, and AWS Control Tower for regulatory compliance across countries",
+    "Deploy Amazon EC2 for vehicle applications, Amazon RDS for vehicle data, AWS Lambda for sensor processing, Amazon S3 for simulation data, and Amazon CloudWatch for monitoring",
+    "Implement Amazon EKS for containerized vehicle services, Amazon Aurora for vehicle database, AWS Step Functions for testing workflows, Amazon SageMaker for vehicle analytics, and AWS Config for compliance monitoring",
+    "Use Amazon API Gateway for vehicle APIs, Amazon DynamoDB for sensor readings, AWS Glue for vehicle data processing, Amazon Redshift for vehicle analytics, and AWS Security Hub for vehicle security"
+  ],
+  correct: 0,
+  explanation: {
+    correct: "Kinesis processes terabytes of sensor data daily from 10,000 vehicles in real-time for safety-critical decision making with sub-second latency requirements. Batch efficiently runs millions of simulation scenarios with cost-optimized compute scaling for comprehensive autonomous vehicle testing coverage. Lambda handles safety-critical processing with automatic scaling and millisecond response times for immediate safety decisions. Control Tower ensures regulatory compliance for autonomous vehicle certification across 30 countries with automated governance frameworks.",
+    whyWrong: {
+      1: "Standard EC2 lacks IoT optimization for 10K vehicle sensor connectivity, insufficient real-time processing capabilities for safety-critical decisions",
+      2: "EKS adds complexity without autonomous vehicle benefits, Step Functions introduces latency unsuitable for safety-critical processing",
+      3: "Standard APIs insufficient for real-time vehicle sensor data at scale, lacks simulation workload optimization for millions of scenarios"
     },
+    examStrategy: "Autonomous vehicle migration: IoT Core connectivity + Kinesis real-time + Batch simulation + Lambda safety-critical + Control Tower compliance for AV development."
+  }
+},
 
-    {
-      id: 'sap_495',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 190,
-      scenario: "A multinational digital twin consortium for smart cities across 50 metropolitan areas needs to migrate their real-time city modeling, infrastructure optimization, and citizen services systems to AWS. The solution must create digital twins of entire cities, process real-time data from 10 million urban sensors, predict infrastructure maintenance needs, optimize traffic flow reducing congestion by 35%, and enable collaborative urban planning across international boundaries.",
-      question: "Which comprehensive modernization approach provides OPTIMAL digital twin cities with infrastructure optimization and international collaboration?",
-      options: [
-        "Deploy Amazon EC2 for city modeling applications, Amazon S3 for city data, AWS Lambda for sensor processing, Amazon RDS for infrastructure data, and AWS CloudTrail for audit compliance",
-        "Use Amazon EKS for containerized city services, Amazon Aurora for city database, AWS Step Functions for city workflows, Amazon SageMaker for urban analytics, and AWS Config for compliance monitoring",
-        "Implement AWS IoT Core for urban sensor connectivity, AWS IoT TwinMaker for digital twin modeling, Amazon Timestream for time-series urban data, Amazon Location Service for traffic optimization, Amazon Lookout for Equipment for infrastructure maintenance prediction, AWS Lambda for real-time city processing, Amazon QuickSight for urban planning dashboards, and AWS Control Tower for international smart city governance",
-        "Deploy Amazon API Gateway for city APIs, Amazon DynamoDB for sensor data, AWS Glue for urban data processing, Amazon Redshift for city analytics, and AWS Security Hub for urban security"
-      ],
-      correctAnswer: "Implement AWS IoT Core for urban sensor connectivity, AWS IoT TwinMaker for digital twin modeling, Amazon Timestream for time-series urban data, Amazon Location Service for traffic optimization, Amazon Lookout for Equipment for infrastructure maintenance prediction, AWS Lambda for real-time city processing, Amazon QuickSight for urban planning dashboards, and AWS Control Tower for international smart city governance",
-      explanation: "IoT Core connects 10M urban sensors across 50 cities for real-time data collection, TwinMaker creates comprehensive digital twins of entire metropolitan areas, Timestream stores time-series urban data efficiently, Location Service optimizes traffic flow reducing congestion by 35%, Lookout for Equipment predicts infrastructure maintenance needs, Lambda processes real-time city data for immediate responses, QuickSight provides collaborative urban planning dashboards, and Control Tower enables international smart city collaboration and governance."
+{
+  id: 'sap_495',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 190,
+  scenario: "A multinational digital twin consortium for smart cities across 50 metropolitan areas needs to migrate their real-time city modeling, infrastructure optimization, and citizen services systems to AWS. The solution must create digital twins of entire cities, process real-time data from 10 million urban sensors, predict infrastructure maintenance needs, optimize traffic flow reducing congestion by 35%, and enable collaborative urban planning across international boundaries.",
+  question: "Which comprehensive modernization approach provides OPTIMAL digital twin cities with infrastructure optimization and international collaboration?",
+  options: [
+    "Deploy Amazon EC2 for city modeling applications, Amazon S3 for city data, AWS Lambda for sensor processing, Amazon RDS for infrastructure data, and AWS CloudTrail for audit compliance",
+    "Use Amazon EKS for containerized city services, Amazon Aurora for city database, AWS Step Functions for city workflows, Amazon SageMaker for urban analytics, and AWS Config for compliance monitoring",
+    "Implement AWS IoT Core for urban sensor connectivity, AWS IoT TwinMaker for digital twin modeling, Amazon Timestream for time-series urban data, Amazon Location Service for traffic optimization, Amazon Lookout for Equipment for infrastructure maintenance prediction, AWS Lambda for real-time city processing, Amazon QuickSight for urban planning dashboards, and AWS Control Tower for international smart city governance",
+    "Deploy Amazon API Gateway for city APIs, Amazon DynamoDB for sensor data, AWS Glue for urban data processing, Amazon Redshift for city analytics, and AWS Security Hub for urban security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "TwinMaker creates comprehensive digital twins of 50 metropolitan areas with 3D visualization and real-time data integration from 10M sensors. Location Service optimizes traffic flow reducing congestion by 35% through ML-powered route analysis and predictive traffic modeling. Lookout for Equipment predicts infrastructure maintenance needs using anomaly detection on urban systems data. Control Tower enables international collaboration across metropolitan boundaries with standardized governance frameworks for smart city initiatives.",
+    whyWrong: {
+      0: "Standard EC2 lacks digital twin modeling capabilities, insufficient for 10M sensor scale across 50 metropolitan areas",
+      1: "EKS doesn't provide digital twin services, lacks traffic optimization algorithms for 35% congestion reduction targets",
+      3: "Standard database insufficient for 10M sensor real-time processing, lacks digital twin visualization and traffic optimization capabilities"
     },
+    examStrategy: "Digital twin cities migration: TwinMaker modeling + Location Service traffic optimization + Lookout Equipment predictive + Control Tower governance for smart city collaboration."
+  }
+},
 
-    {
-      id: 'sap_496',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "medium",
-      timeRecommendation: 135,
-      scenario: "A global language learning platform serving 200 million users needs to migrate their adaptive learning, speech recognition, and progress tracking systems to AWS. They offer courses in 100 languages, need real-time pronunciation assessment, AI-powered personalized learning paths, and want to reduce learning time by 40% through advanced adaptive algorithms.",
-      question: "Which migration approach provides OPTIMAL language learning with speech recognition and adaptive personalization?",
-      options: [
-        "Deploy Amazon Transcribe for speech recognition, Amazon Polly for pronunciation examples, Amazon Personalize for adaptive learning paths, AWS Lambda for progress processing, Amazon Translate for multi-language support, and Amazon CloudFront for global content delivery",
-        "Use Amazon EC2 for learning applications, Amazon RDS for user data, AWS Lambda for speech processing, Amazon S3 for course content, and Amazon CloudWatch for monitoring",
-        "Implement Amazon EKS for containerized learning services, Amazon Aurora for education database, AWS Step Functions for learning workflows, Amazon SageMaker for learning analytics, and AWS Batch for batch processing",
-        "Deploy Amazon API Gateway for learning APIs, Amazon DynamoDB for progress tracking, AWS Glue for learning data processing, Amazon Redshift for education analytics, and AWS Config for configuration management"
-      ],
-      correctAnswer: "Deploy Amazon Transcribe for speech recognition, Amazon Polly for pronunciation examples, Amazon Personalize for adaptive learning paths, AWS Lambda for progress processing, Amazon Translate for multi-language support, and Amazon CloudFront for global content delivery",
-      explanation: "Transcribe provides real-time pronunciation assessment and speech recognition for language learning, Polly generates natural pronunciation examples in 100 languages, Personalize creates AI-powered adaptive learning paths reducing learning time by 40%, Lambda processes learning progress and adjustments in real-time, Translate enables multi-language course support and cross-language features, and CloudFront delivers learning content globally to 200M users with optimal performance."
+{
+  id: 'sap_496',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "medium",
+  timeRecommendation: 135,
+  scenario: "A global language learning platform serving 200 million users needs to migrate their adaptive learning, speech recognition, and progress tracking systems to AWS. They offer courses in 100 languages, need real-time pronunciation assessment, AI-powered personalized learning paths, and want to reduce learning time by 40% through advanced adaptive algorithms.",
+  question: "Which migration approach provides OPTIMAL language learning with speech recognition and adaptive personalization?",
+  options: [
+    "Deploy Amazon Transcribe for speech recognition, Amazon Polly for pronunciation examples, Amazon Personalize for adaptive learning paths, AWS Lambda for progress processing, Amazon Translate for multi-language support, and Amazon CloudFront for global content delivery",
+    "Use Amazon EC2 for learning applications, Amazon RDS for user data, AWS Lambda for speech processing, Amazon S3 for course content, and Amazon CloudWatch for monitoring",
+    "Implement Amazon EKS for containerized learning services, Amazon Aurora for education database, AWS Step Functions for learning workflows, Amazon SageMaker for learning analytics, and AWS Batch for batch processing",
+    "Deploy Amazon API Gateway for learning APIs, Amazon DynamoDB for progress tracking, AWS Glue for learning data processing, Amazon Redshift for education analytics, and AWS Config for configuration management"
+  ],
+  correct: 0,
+  explanation: {
+    correct: "Transcribe provides real-time pronunciation assessment with phoneme-level accuracy for immediate feedback across 100 languages. Personalize creates AI-powered adaptive learning paths reducing learning time by 40% through ML-driven content recommendation algorithms. Polly generates natural pronunciation examples supporting 100 languages with neural voice synthesis. Translate enables cross-language learning features and localization for 200M global users with high-quality language processing.",
+    whyWrong: {
+      1: "Standard EC2 lacks AI speech recognition capabilities, insufficient for real-time pronunciation assessment across 100 languages",
+      2: "EKS adds complexity without language learning benefits, lacks speech recognition and adaptive personalization features",
+      3: "Standard APIs don't provide speech recognition capabilities, lacks AI-powered adaptive learning algorithms for 40% time reduction"
     },
+    examStrategy: "Language learning migration: Transcribe speech recognition + Personalize adaptive paths + Polly pronunciation + Translate multi-language for global education platform."
+  }
+},
 
-    {
-      id: 'sap_497',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 185,
-      scenario: "A multinational underwater exploration company with submersibles operating in all major oceans needs to migrate their deep-sea data collection, marine life monitoring, and ocean research coordination systems to AWS. The solution must handle communication delays with deep-sea vehicles, process oceanographic data from 1,000 underwater sensors, predict marine ecosystem changes, coordinate international ocean research, and ensure environmental compliance for marine operations.",
-      question: "Which comprehensive modernization strategy provides OPTIMAL underwater exploration with marine ecosystem monitoring and international research coordination?",
-      options: [
-        "Deploy Amazon EC2 for ocean applications, Amazon S3 for oceanographic data, AWS Lambda for sensor processing, Amazon RDS for marine data, and AWS CloudWatch for monitoring",
-        "Use Amazon EKS for containerized ocean services, Amazon Aurora for ocean database, AWS Step Functions for exploration workflows, Amazon SageMaker for marine analytics, and AWS Config for compliance monitoring",
-        "Implement AWS IoT Core for underwater sensor connectivity, Amazon Timestream for time-series oceanographic data, Amazon Forecast for marine ecosystem prediction, AWS Step Functions for delay-tolerant underwater workflows, Amazon Location Service for underwater navigation, AWS PrivateLink for secure research vessel connectivity, Amazon S3 with Cross-Region Replication for marine research data sharing, and AWS Control Tower for international ocean research governance",
-        "Deploy Amazon API Gateway for ocean APIs, Amazon DynamoDB for sensor measurements, AWS Glue for oceanographic data processing, Amazon Redshift for marine analytics, and AWS Security Hub for ocean security"
-      ],
-      correctAnswer: "Implement AWS IoT Core for underwater sensor connectivity, Amazon Timestream for time-series oceanographic data, Amazon Forecast for marine ecosystem prediction, AWS Step Functions for delay-tolerant underwater workflows, Amazon Location Service for underwater navigation, AWS PrivateLink for secure research vessel connectivity, Amazon S3 with Cross-Region Replication for marine research data sharing, and AWS Control Tower for international ocean research governance",
-      explanation: "IoT Core manages connectivity with 1,000 underwater sensors across all major oceans, Timestream efficiently stores time-series oceanographic data, Forecast predicts marine ecosystem changes for environmental monitoring, Step Functions handles delay-tolerant workflows accommodating deep-sea communication delays, Location Service provides underwater navigation for submersibles, PrivateLink ensures secure connectivity between research vessels, S3 Cross-Region Replication enables international marine research data sharing, and Control Tower provides governance for international ocean research coordination and environmental compliance."
+{
+  id: 'sap_497',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 185,
+  scenario: "A multinational underwater exploration company with submersibles operating in all major oceans needs to migrate their deep-sea data collection, marine life monitoring, and ocean research coordination systems to AWS. The solution must handle communication delays with deep-sea vehicles, process oceanographic data from 1,000 underwater sensors, predict marine ecosystem changes, coordinate international ocean research, and ensure environmental compliance for marine operations.",
+  question: "Which comprehensive modernization strategy provides OPTIMAL underwater exploration with marine ecosystem monitoring and international research coordination?",
+  options: [
+    "Deploy Amazon EC2 for ocean applications, Amazon S3 for oceanographic data, AWS Lambda for sensor processing, Amazon RDS for marine data, and AWS CloudWatch for monitoring",
+    "Use Amazon EKS for containerized ocean services, Amazon Aurora for ocean database, AWS Step Functions for exploration workflows, Amazon SageMaker for marine analytics, and AWS Config for compliance monitoring",
+    "Implement AWS IoT Core for underwater sensor connectivity, Amazon Timestream for time-series oceanographic data, Amazon Forecast for marine ecosystem prediction, AWS Step Functions for delay-tolerant underwater workflows, Amazon Location Service for underwater navigation, AWS PrivateLink for secure research vessel connectivity, Amazon S3 with Cross-Region Replication for marine research data sharing, and AWS Control Tower for international ocean research governance",
+    "Deploy Amazon API Gateway for ocean APIs, Amazon DynamoDB for sensor measurements, AWS Glue for oceanographic data processing, Amazon Redshift for marine analytics, and AWS Security Hub for ocean security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "Step Functions handles delay-tolerant workflows accommodating deep-sea communication delays with automatic retry and state management for intermittent connectivity. Forecast predicts marine ecosystem changes using oceanographic data patterns and environmental variables for conservation planning. Location Service provides underwater navigation for submersibles across all major oceans with precise positioning. Control Tower ensures international ocean research governance with environmental compliance across maritime boundaries and regulations.",
+    whyWrong: {
+      0: "Standard EC2 lacks underwater communication optimization, insufficient for deep-sea delay tolerance and marine ecosystem prediction requirements",
+      1: "EKS doesn't address underwater communication delays, lacks marine-specific ecosystem prediction and delay-tolerant workflow capabilities",
+      3: "Standard APIs insufficient for underwater connectivity challenges, lacks delay-tolerant communication and specialized marine ecosystem modeling"
     },
+    examStrategy: "Underwater exploration migration: Step Functions delay-tolerant + Forecast ecosystem prediction + Location Service navigation + Control Tower governance for international marine research."
+  }
+},
 
-    {
-      id: 'sap_498',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "medium",
-      timeRecommendation: 140,
-      scenario: "A global virtual events platform needs to migrate their live streaming, interactive networking, and analytics systems to AWS. They host events for up to 1 million concurrent attendees, need real-time audience interaction, support multiple breakout sessions simultaneously, and provide detailed engagement analytics to event organizers.",
-      question: "Which migration strategy provides OPTIMAL virtual events with massive scalability and real-time interaction capabilities?",
-      options: [
-        "Use AWS Elemental MediaLive for live streaming, Amazon IVS for interactive video, Amazon Chime SDK for breakout sessions, Amazon Kinesis for real-time audience analytics, AWS Lambda for event processing, and Amazon QuickSight for engagement dashboards",
-        "Deploy Amazon EC2 for event applications, Amazon RDS for attendee data, AWS Lambda for streaming processing, Amazon S3 for event content, and Amazon CloudWatch for monitoring",
-        "Implement Amazon EKS for containerized event services, Amazon Aurora for event database, AWS Step Functions for event workflows, Amazon SageMaker for engagement analytics, and AWS Batch for batch processing",
-        "Use Amazon API Gateway for event APIs, Amazon DynamoDB for session data, AWS Glue for event data processing, Amazon Redshift for event analytics, and AWS Config for configuration management"
-      ],
-      correctAnswer: "Use AWS Elemental MediaLive for live streaming, Amazon IVS for interactive video, Amazon Chime SDK for breakout sessions, Amazon Kinesis for real-time audience analytics, AWS Lambda for event processing, and Amazon QuickSight for engagement dashboards",
-      explanation: "MediaLive provides scalable live streaming for up to 1M concurrent attendees, IVS enables real-time audience interaction and engagement, Chime SDK supports multiple simultaneous breakout sessions, Kinesis processes real-time audience analytics and engagement data, Lambda handles dynamic event processing and scaling, and QuickSight provides detailed engagement analytics dashboards for event organizers."
+{
+  id: 'sap_498',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "medium",
+  timeRecommendation: 140,
+  scenario: "A global virtual events platform needs to migrate their live streaming, interactive networking, and analytics systems to AWS. They host events for up to 1 million concurrent attendees, need real-time audience interaction, support multiple breakout sessions simultaneously, and provide detailed engagement analytics to event organizers.",
+  question: "Which migration strategy provides OPTIMAL virtual events with massive scalability and real-time interaction capabilities?",
+  options: [
+    "Use AWS Elemental MediaLive for live streaming, Amazon IVS for interactive video, Amazon Chime SDK for breakout sessions, Amazon Kinesis for real-time audience analytics, AWS Lambda for event processing, and Amazon QuickSight for engagement dashboards",
+    "Deploy Amazon EC2 for event applications, Amazon RDS for attendee data, AWS Lambda for streaming processing, Amazon S3 for event content, and Amazon CloudWatch for monitoring",
+    "Implement Amazon EKS for containerized event services, Amazon Aurora for event database, AWS Step Functions for event workflows, Amazon SageMaker for engagement analytics, and AWS Batch for batch processing",
+    "Use Amazon API Gateway for event APIs, Amazon DynamoDB for session data, AWS Glue for event data processing, Amazon Redshift for event analytics, and AWS Config for configuration management"
+  ],
+  correct: 0,
+  explanation: {
+    correct: "MediaLive provides scalable live streaming supporting 1M concurrent attendees with adaptive bitrate and global distribution capabilities. IVS enables real-time audience interaction with sub-second latency for immediate engagement feedback and live polling. Chime SDK supports multiple simultaneous breakout sessions with integrated video, audio, and screen sharing capabilities. Kinesis processes real-time audience analytics for immediate engagement insights during live events with high-throughput data streaming.",
+    whyWrong: {
+      1: "Standard EC2 lacks live streaming optimization for 1M concurrent users, insufficient for real-time interactive video requirements at scale",
+      2: "EKS adds complexity without live streaming benefits, lacks real-time interaction capabilities for massive audience scale",
+      3: "Standard APIs don't provide live streaming infrastructure, insufficient for 1M concurrent attendees and real-time interaction requirements"
     },
+    examStrategy: "Virtual events migration: MediaLive streaming + IVS interaction + Chime SDK breakouts + Kinesis analytics for scalable interactive event platform."
+  }
+},
 
-    {
-      id: 'sap_499',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 195,
-      scenario: "A multinational archaeological research consortium with excavation sites across 40 countries needs to migrate their artifact cataloging, 3D site reconstruction, and historical analysis systems to AWS. The solution must create detailed 3D models of archaeological sites, enable collaborative analysis between international research teams, preserve cultural heritage data for future generations, predict optimal excavation strategies, and ensure compliance with cultural heritage protection laws.",
-      question: "Which comprehensive modernization approach provides OPTIMAL archaeological research with 3D reconstruction and international collaboration capabilities?",
-      options: [
-        "Deploy Amazon EC2 for archaeology applications, Amazon S3 for artifact data, AWS Lambda for analysis processing, Amazon RDS for site data, and AWS CloudTrail for heritage compliance",
-        "Use Amazon EKS for containerized archaeology services, Amazon Aurora for archaeological database, AWS Step Functions for research workflows, Amazon SageMaker for site analytics, and AWS Config for compliance monitoring",
-        "Implement Amazon S3 with Cross-Region Replication for cultural heritage preservation, AWS ParallelCluster for 3D reconstruction processing, Amazon Rekognition for artifact analysis, Amazon Textract for historical document digitization, AWS WorkSpaces for collaborative research environments, Amazon Forecast for excavation optimization, AWS PrivateLink for secure international research connectivity, and AWS Control Tower for cultural heritage compliance across 40 countries",
-        "Deploy Amazon API Gateway for archaeology APIs, Amazon DynamoDB for artifact records, AWS Glue for archaeological data processing, Amazon Redshift for heritage analytics, and AWS Security Hub for heritage security"
-      ],
-      correctAnswer: "Implement Amazon S3 with Cross-Region Replication for cultural heritage preservation, AWS ParallelCluster for 3D reconstruction processing, Amazon Rekognition for artifact analysis, Amazon Textract for historical document digitization, AWS WorkSpaces for collaborative research environments, Amazon Forecast for excavation optimization, AWS PrivateLink for secure international research connectivity, and AWS Control Tower for cultural heritage compliance across 40 countries",
-      explanation: "S3 Cross-Region Replication preserves cultural heritage data across multiple regions for future generations, ParallelCluster provides computational power for detailed 3D site reconstruction, Rekognition analyzes and catalogs artifacts automatically, Textract digitizes historical documents for preservation, WorkSpaces enables collaborative analysis between international research teams, Forecast predicts optimal excavation strategies, PrivateLink ensures secure connectivity for sensitive archaeological data, and Control Tower ensures compliance with cultural heritage protection laws across 40 countries."
+{
+  id: 'sap_499',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 195,
+  scenario: "A multinational archaeological research consortium with excavation sites across 40 countries needs to migrate their artifact cataloging, 3D site reconstruction, and historical analysis systems to AWS. The solution must create detailed 3D models of archaeological sites, enable collaborative analysis between international research teams, preserve cultural heritage data for future generations, predict optimal excavation strategies, and ensure compliance with cultural heritage protection laws.",
+  question: "Which comprehensive modernization approach provides OPTIMAL archaeological research with 3D reconstruction and international collaboration capabilities?",
+  options: [
+    "Deploy Amazon EC2 for archaeology applications, Amazon S3 for artifact data, AWS Lambda for analysis processing, Amazon RDS for site data, and AWS CloudTrail for heritage compliance",
+    "Use Amazon EKS for containerized archaeology services, Amazon Aurora for archaeological database, AWS Step Functions for research workflows, Amazon SageMaker for site analytics, and AWS Config for compliance monitoring",
+    "Implement Amazon S3 with Cross-Region Replication for cultural heritage preservation, AWS ParallelCluster for 3D reconstruction processing, Amazon Rekognition for artifact analysis, Amazon Textract for historical document digitization, AWS WorkSpaces for collaborative research environments, Amazon Forecast for excavation optimization, AWS PrivateLink for secure international research connectivity, and AWS Control Tower for cultural heritage compliance across 40 countries",
+    "Deploy Amazon API Gateway for archaeology APIs, Amazon DynamoDB for artifact records, AWS Glue for archaeological data processing, Amazon Redshift for heritage analytics, and AWS Security Hub for heritage security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "ParallelCluster provides HPC processing for detailed 3D site reconstruction with photogrammetry and LiDAR data processing capabilities. S3 Cross-Region Replication preserves cultural heritage data across multiple regions with 99.999999999% durability for future generations. Rekognition automatically catalogs and analyzes artifacts using computer vision for pattern recognition and classification. Control Tower ensures compliance with cultural heritage protection laws across 40 countries with automated governance frameworks and regulatory monitoring.",
+    whyWrong: {
+      0: "Standard EC2 lacks HPC optimization for 3D reconstruction processing, insufficient for detailed archaeological site modeling requirements",
+      1: "EKS doesn't provide HPC capabilities needed for 3D reconstruction, lacks specialized cultural heritage preservation features",
+      3: "Standard database insufficient for 3D reconstruction data requirements, lacks cultural heritage compliance and preservation capabilities"
     },
+    examStrategy: "Archaeological research migration: ParallelCluster 3D reconstruction + S3 Cross-Region preservation + Rekognition artifact analysis + Control Tower heritage compliance for cultural preservation."
+  }
+},
 
-    {
-      id: 'sap_500',
-      domain: "Domain 4: Accelerate Workload Migration and Modernization",
-      difficulty: "hard",
-      timeRecommendation: 200,
-      scenario: "A multinational interstellar communication research consortium with radio telescopes across 6 continents needs to migrate their signal processing, extraterrestrial intelligence search, and astronomical data analysis systems to AWS. The solution must process exabytes of radio telescope data, detect potential extraterrestrial signals in real-time, coordinate global telescope arrays, enable international collaboration on SETI research, and maintain the highest levels of data integrity for scientific discovery.",
-      question: "Which comprehensive modernization approach provides OPTIMAL interstellar communication research with global telescope coordination and advanced signal detection capabilities?",
-      options: [
-        "Deploy Amazon EC2 for signal processing applications, Amazon S3 for telescope data, AWS Lambda for signal analysis, Amazon RDS for research data, and AWS CloudWatch for monitoring",
-        "Use Amazon EKS for containerized astronomy services, Amazon Aurora for telescope database, AWS Step Functions for research workflows, Amazon SageMaker for signal analytics, and AWS Config for compliance monitoring",
-        "Implement AWS ParallelCluster for massive signal processing workloads, Amazon S3 with Intelligent Tiering for exabyte-scale telescope data, AWS Ground Station for telescope coordination, Amazon Kinesis Analytics for real-time signal detection, Amazon SageMaker with distributed training for pattern recognition, AWS Direct Connect for high-bandwidth telescope connectivity, Amazon FSx for Lustre for high-performance shared analysis storage, and AWS Control Tower for international SETI research governance",
-        "Deploy Amazon API Gateway for astronomy APIs, Amazon DynamoDB for signal data, AWS Glue for telescope data processing, Amazon Redshift for astronomical analytics, and AWS Security Hub for research security"
-      ],
-      correctAnswer: "Implement AWS ParallelCluster for massive signal processing workloads, Amazon S3 with Intelligent Tiering for exabyte-scale telescope data, AWS Ground Station for telescope coordination, Amazon Kinesis Analytics for real-time signal detection, Amazon SageMaker with distributed training for pattern recognition, AWS Direct Connect for high-bandwidth telescope connectivity, Amazon FSx for Lustre for high-performance shared analysis storage, and AWS Control Tower for international SETI research governance",
-      explanation: "ParallelCluster provides massive computational power for processing exabytes of radio telescope data, S3 Intelligent Tiering cost-effectively manages exabyte-scale astronomical data storage, Ground Station coordinates global telescope arrays across 6 continents, Kinesis Analytics detects potential extraterrestrial signals in real-time, SageMaker distributed training enables advanced pattern recognition for SETI research, Direct Connect provides high-bandwidth connectivity for telescope data transfer, FSx for Lustre provides high-performance shared storage for collaborative analysis, and Control Tower ensures governance for international SETI research collaboration while maintaining scientific data integrity."
-    }	
-
-	},	
+{
+  id: 'sap_500',
+  domain: "Domain 4: Accelerate Workload Migration and Modernization",
+  difficulty: "hard",
+  timeRecommendation: 200,
+  scenario: "A multinational interstellar communication research consortium with radio telescopes across 6 continents needs to migrate their signal processing, extraterrestrial intelligence search, and astronomical data analysis systems to AWS. The solution must process exabytes of radio telescope data, detect potential extraterrestrial signals in real-time, coordinate global telescope arrays, enable international collaboration on SETI research, and maintain the highest levels of data integrity for scientific discovery.",
+  question: "Which comprehensive modernization approach provides OPTIMAL interstellar communication research with global telescope coordination and advanced signal detection capabilities?",
+  options: [
+    "Deploy Amazon EC2 for signal processing applications, Amazon S3 for telescope data, AWS Lambda for signal analysis, Amazon RDS for research data, and AWS CloudWatch for monitoring",
+    "Use Amazon EKS for containerized astronomy services, Amazon Aurora for telescope database, AWS Step Functions for research workflows, Amazon SageMaker for signal analytics, and AWS Config for compliance monitoring",
+    "Implement AWS ParallelCluster for massive signal processing workloads, Amazon S3 with Intelligent Tiering for exabyte-scale telescope data, AWS Ground Station for telescope coordination, Amazon Kinesis Analytics for real-time signal detection, Amazon SageMaker with distributed training for pattern recognition, AWS Direct Connect for high-bandwidth telescope connectivity, Amazon FSx for Lustre for high-performance shared analysis storage, and AWS Control Tower for international SETI research governance",
+    "Deploy Amazon API Gateway for astronomy APIs, Amazon DynamoDB for signal data, AWS Glue for telescope data processing, Amazon Redshift for astronomical analytics, and AWS Security Hub for research security"
+  ],
+  correct: 2,
+  explanation: {
+    correct: "ParallelCluster provides massive computational power for processing exabytes of radio telescope data with HPC-optimized networking and job scheduling across 6 continents. Kinesis Analytics detects potential extraterrestrial signals in real-time using advanced stream processing and ML algorithms for pattern recognition. Ground Station coordinates global telescope arrays with satellite communication capabilities for synchronized observations. SageMaker distributed training enables advanced pattern recognition for SETI signal analysis with scientific-grade accuracy requirements and collaborative research capabilities.",
+    whyWrong: {
+      0: "Standard EC2 insufficient for exabyte-scale signal processing requirements, lacks real-time detection capabilities for extraterrestrial signals",
+      1: "EKS doesn't provide HPC capabilities needed for massive signal processing, lacks telescope coordination and real-time signal detection features",
+      3: "Standard database insufficient for exabyte telescope data scale, lacks real-time signal detection and global telescope coordination capabilities"
+    },
+    examStrategy: "SETI research migration: ParallelCluster exabyte processing + Kinesis Analytics real-time detection + Ground Station coordination + SageMaker pattern recognition for interstellar communication research."
+  }
+},
 	
 ];  // <-- This closes the questionBank array
 
